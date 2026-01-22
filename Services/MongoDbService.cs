@@ -1,27 +1,31 @@
-﻿using MongoDB.Driver;
-using MongoDB.Driver.Core.Configuration;
+﻿using JobSter.Model;
+using MongoDB.Driver;
 
 namespace JobSter.Services;
+
 public class MongoDbService {
     private static readonly string _connectionString = "mongodb://localhost:27017/";
+
+    public IMongoCollection<Company> Companies { get; }
+    public IMongoCollection<JobApplication> JobApplications { get; }
+
     public MongoDbService() {
         var client = new MongoClient(_connectionString);
-        var myUser = new User() { FirstName = "Fredrik", LastName = "Johansson" };
+        var db = client.GetDatabase("MikaelRosTobiasson");
 
-        var userCollection = client.GetDatabase("MikaelRosTobiasson").GetCollection<User>("users");
+        Companies = db.GetCollection<Company>("companies");
+        JobApplications = db.GetCollection<JobApplication>("jobApplications");
 
-        //userCollection.InsertOne(myUser);
+        if(JobApplications.CountDocuments(Builders<JobApplication>.Filter.Empty) == 0) {
+            var demoJob = new JobApplication {
+                Title = "Test Developer",
+                CompanyName = "Demo AB",
+                AppliedAt = DateTime.UtcNow,
+                Status = "Pending"
+            };
 
-        var userFilter = Builders<User>.Filter.Eq("FirstName", "Fredrik");
-        var userUpdate = Builders<User>.Update.Set("LastName", "Gustavsson");
-
-        //userCollection.UpdateMany(userFilter, userUpdate);
-
-        userCollection.DeleteMany(userFilter);
+            JobApplications.InsertOne(demoJob);
+            System.Windows.MessageBox.Show("Demo data inserted – check Compass now!");
+        }
     }
-
-}
-class User {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
 }
