@@ -7,4 +7,10 @@ public partial class LoginView : Window {
         InitializeComponent();
         DataContext = new LoginViewModel();
     }
+
+    private void btnLogin_Click(object sender, RoutedEventArgs e) {
+        var passwordView = new PasswordView();
+        passwordView.Show();
+
+    }
 }

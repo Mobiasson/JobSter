@@ -39,7 +39,7 @@
                         </Style.Triggers>
                     </Style>
                 </TextBlock.Style></TextBlock>
-            <Button Content="Login">
+            <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Visibility" Value="Collapsed" />
