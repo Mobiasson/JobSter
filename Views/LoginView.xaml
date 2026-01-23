@@ -17,6 +17,10 @@
                                 <Setter Property="BorderBrush" Value="#FFF44336" />
                                 <Setter Property="Background" Value="#FFFFEBEE" />
                             </DataTrigger>
+                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+                                <Setter Property="BorderBrush" Value="#FFCCCCCC" />
+                                <Setter Property="Background" Value="White" />
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBox.Style>
@@ -42,6 +46,9 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsValid}" Value="True">
                                 <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=txtUsername}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
