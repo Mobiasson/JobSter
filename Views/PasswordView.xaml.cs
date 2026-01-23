@@ -10,4 +10,13 @@ public partial class PasswordView : Window {
         Close();
     }
 
+    private void btn_Back_Click(object sender, RoutedEventArgs e) {
+        Close();
+    }
+
+    private void btn_Confirm_Click(object sender, RoutedEventArgs e) {
+        Close();
+        var mainWindow = new MainWindow();
+        mainWindow.Show();
+    }
 }
