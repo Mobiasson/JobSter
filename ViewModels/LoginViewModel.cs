@@ -13,7 +13,7 @@ public class LoginViewModel : INotifyPropertyChanged {
             if(_username == value) return;
             _username = value;
             OnPropertyChanged(nameof(Username));
-            Validate();
+            UsernameValidation();
         }
     }
 
@@ -27,7 +27,7 @@ public class LoginViewModel : INotifyPropertyChanged {
         }
     }
 
-    private void Validate() {
+    private void UsernameValidation() {
         if(string.IsNullOrWhiteSpace(Username))
             UsernameError = "Username is required";
         else if(Username.Length < 3 || Username.Length > 20)

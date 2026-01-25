@@ -1,10 +1,18 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 
 namespace JobSter.Views;
 public partial class PasswordView : Window {
     public PasswordView() {
         InitializeComponent();
+    }
+
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) {
+        var pass = PasswordInput.Password;
+        var confirm = ConfirmPassword.Password;
+        var bothFilled = !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(confirm);
+        var match = bothFilled && pass == confirm;
+        btn_Confirm.IsEnabled = match;
+        PasswordMismatchMessage.Visibility = bothFilled && !match ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private void btn_Close_Click(object sender, RoutedEventArgs e) {
