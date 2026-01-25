@@ -17,7 +17,6 @@ public class MongoDbService {
         Companies = db.GetCollection<Company>("companies");
         JobApplications = db.GetCollection<JobApplication>("jobApplications");
         Users = db.GetCollection<User>("users");
-
         if(JobApplications.CountDocuments(Builders<JobApplication>.Filter.Empty) == 0) {
             var demoJob = new JobApplication {
                 Title = "Test Developer",
@@ -33,5 +32,13 @@ public class MongoDbService {
 
     public void CreateUser(User user) {
         Users.InsertOne(user);
+    }
+
+    public User? GetUserByUsername(string username) {
+        return Users.Find(u => u.Username == username).FirstOrDefault();
+    }
+
+    public User? GetUserByUsernameAndPassword(string username, string password) {
+        return Users.Find(u => u.Username == username && u.Password == password).FirstOrDefault();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using JobSter.Model;
 
 namespace JobSter.Views;
@@ -33,11 +34,14 @@ public partial class PasswordView : Window {
     private void btn_Confirm_Click(object sender, RoutedEventArgs e) {
         var service = App.MongoDb;
         if(service is not null) {
-            var user = new User {
-                Username = _username,
-                Password = PasswordInput.Password
-            };
-            service.CreateUser(user);
+            var existing = service.GetUserByUsernameAndPassword(_username, PasswordInput.Password);
+            if(existing is null) {
+                var user = new User {
+                    Username = _username,
+                    Password = PasswordInput.Password
+                };
+                service.CreateUser(user);
+            }
         }
 
         var mainWindow = new MainWindow();
