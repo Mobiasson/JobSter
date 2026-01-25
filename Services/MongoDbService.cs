@@ -8,6 +8,7 @@ public class MongoDbService {
 
     public IMongoCollection<Company> Companies { get; }
     public IMongoCollection<JobApplication> JobApplications { get; }
+    public IMongoCollection<User> Users { get; }
 
     public MongoDbService() {
         var client = new MongoClient(_connectionString);
@@ -15,6 +16,7 @@ public class MongoDbService {
 
         Companies = db.GetCollection<Company>("companies");
         JobApplications = db.GetCollection<JobApplication>("jobApplications");
+        Users = db.GetCollection<User>("users");
 
         if(JobApplications.CountDocuments(Builders<JobApplication>.Filter.Empty) == 0) {
             var demoJob = new JobApplication {
@@ -27,5 +29,9 @@ public class MongoDbService {
             JobApplications.InsertOne(demoJob);
             System.Windows.MessageBox.Show("Demo data inserted – check Compass now!");
         }
+    }
+
+    public void CreateUser(User user) {
+        Users.InsertOne(user);
     }
 }

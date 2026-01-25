@@ -1,9 +1,16 @@
 ﻿using System.Windows;
+using JobSter.Model;
 
 namespace JobSter.Views;
 public partial class PasswordView : Window {
+    private readonly string _username = string.Empty;
+
     public PasswordView() {
         InitializeComponent();
+    }
+
+    public PasswordView(string username) : this() {
+        _username = username ?? string.Empty;
     }
 
     private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e) {
@@ -24,6 +31,15 @@ public partial class PasswordView : Window {
     }
 
     private void btn_Confirm_Click(object sender, RoutedEventArgs e) {
+        var service = App.MongoDb;
+        if(service is not null) {
+            var user = new User {
+                Username = _username,
+                Password = PasswordInput.Password
+            };
+            service.CreateUser(user);
+        }
+
         var mainWindow = new MainWindow();
         Application.Current.MainWindow = mainWindow;
         mainWindow.Show();

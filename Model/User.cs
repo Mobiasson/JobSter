@@ -12,11 +12,9 @@ public class User
     [BsonElement("username")]
     public string Username { get; set; } = string.Empty;
 
-    [BsonElement("pinHash")]
-    public string PinHash { get; set; } = string.Empty;
+    [BsonElement("password")]
+    public string Password { get; set; } = string.Empty;
 
-    [BsonElement("pinSalt")]
-    public string PinSalt { get; set; } = string.Empty;
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

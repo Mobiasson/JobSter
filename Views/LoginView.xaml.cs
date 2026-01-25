@@ -9,13 +9,16 @@ public partial class LoginView : Window {
     }
 
     private void btnLogin_Click(object sender, RoutedEventArgs e) {
-        var passwordView = new PasswordView();
-        passwordView.Show();
+        var vm = DataContext as LoginViewModel;
+        var username = vm?.Username ?? string.Empty;
 
+        var passwordView = new PasswordView(username) {
+            Owner = this
+        };
+        passwordView.Show();
     }
 
     private void btn_Close_Click(object sender, RoutedEventArgs e) {
         Close();
     }
-
 }

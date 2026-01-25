@@ -24,7 +24,7 @@
             <TextBlock Text="JobSter" FontSize="30" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/Noto/NotoSans-Italic.ttf#Noto Sans" />
         </Border>
         <StackPanel Orientation="Vertical" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Login" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,8" />
+            <TextBlock Text="Username" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,8" />
             <TextBox x:Name="txtUsername" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" BorderThickness="1" Height="30" Padding="6" VerticalContentAlignment="Center" TextAlignment="Left">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
