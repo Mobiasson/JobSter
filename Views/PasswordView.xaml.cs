@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using JobSter.Model;
 
 namespace JobSter.Views;
@@ -24,33 +23,31 @@ public partial class PasswordView : Window {
     }
 
     private void btn_Close_Click(object sender, RoutedEventArgs e) {
-        Close();
+        DialogResult = false;
     }
 
     private void btn_Back_Click(object sender, RoutedEventArgs e) {
-        Close();
+        DialogResult = false;
     }
 
     private void btn_Confirm_Click(object sender, RoutedEventArgs e) {
         var service = App.MongoDb;
-        if(service is not null) {
-            var existing = service.GetUserByUsernameAndPassword(_username, PasswordInput.Password);
-            if(existing is null) {
-                var user = new User {
-                    Username = _username,
-                    Password = PasswordInput.Password
-                };
-                service.CreateUser(user);
-            }
+        if(service is null) {
+            MessageBox.Show("Database service is not available.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
         }
 
-        var mainWindow = new MainWindow();
-        Application.Current.MainWindow = mainWindow;
-        mainWindow.Show();
-        Close();
-        Owner?.Close();
-        foreach(var login in Application.Current.Windows.OfType<LoginView>().ToList()) {
-            login.Close();
+        var existing = service.GetUserByUsernameAndPassword(_username, PasswordInput.Password);
+        if(existing is null) {
+            var user = new User {
+                Username = _username,
+                Password = PasswordInput.Password
+            };
+            service.CreateUser(user);
+            App.CurrentUser = user;
+        } else {
+            App.CurrentUser = existing;
         }
+        DialogResult = true;
     }
 }

@@ -23,5 +23,10 @@ namespace JobSter.Model {
 
         [BsonElement("status")]
         public string Status { get; set; } = "Pending";
+
+        [BsonElement("userId")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? UserId { get; set; }
     }
 }
+

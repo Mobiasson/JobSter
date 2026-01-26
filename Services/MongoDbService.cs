@@ -17,17 +17,6 @@ public class MongoDbService {
         Companies = db.GetCollection<Company>("companies");
         JobApplications = db.GetCollection<JobApplication>("jobApplications");
         Users = db.GetCollection<User>("users");
-        if(JobApplications.CountDocuments(Builders<JobApplication>.Filter.Empty) == 0) {
-            var demoJob = new JobApplication {
-                Title = "Test Developer",
-                CompanyName = "Demo AB",
-                AppliedAt = DateTime.UtcNow,
-                Status = "Pending"
-            };
-
-            JobApplications.InsertOne(demoJob);
-            System.Windows.MessageBox.Show("Demo data inserted – check Compass now!");
-        }
     }
 
     public void CreateUser(User user) {
