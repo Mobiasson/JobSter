@@ -66,12 +66,13 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="30,40,30,30" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="LightGray" ScrollViewer.CanContentScroll="True">
+            <ListBox Grid.Column="0" Margin="40,40,40,20" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#673AB7" BorderThickness="2" Background="LightGray" ScrollViewer.CanContentScroll="True">
                 <ListBox.Template>
                     <ControlTemplate TargetType="ListBox">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" ClipToBounds="True">
@@ -92,7 +93,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel>
                                     <TextBlock Text="{Binding JobTitle}" FontSize="16" FontWeight="SemiBold" />
@@ -108,10 +109,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Column="1" Margin="20">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                    <Button Content="Add Job" />
-                    <Button Content="Delete Job" />
+            <Grid Grid.Column="0" Grid.Row="2" Margin="20">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Button Content="Delete Job" Margin="0,0,5,0" />
+                    <Button Content="Add Job" Margin="5,0,0,0" />
                 </StackPanel>
             </Grid>
         </Grid>
