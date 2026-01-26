@@ -72,7 +72,7 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="40,40,40,20" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#673AB7" BorderThickness="2" Background="LightGray" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox Grid.Column="0" x:Name="JobListBox" Margin="40,40,40,20" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob, Mode=TwoWay}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#673AB7" BorderThickness="2" Background="LightGray" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.Template>
                     <ControlTemplate TargetType="ListBox">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" ClipToBounds="True">
