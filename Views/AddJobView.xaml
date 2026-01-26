@@ -1,4 +1,4 @@
-﻿<Window x:Class="JobSter.Views.AddJobView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:JobSter.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" mc:Ignorable="d" Title="AddJobView" Height="200" Width="400" WindowStyle="None" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" BorderBrush="#673AB7" BorderThickness="1.5">
+﻿<Window x:Class="JobSter.Views.AddJobView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:JobSter.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" mc:Ignorable="d" Title="AddJobView" Height="250" Width="400" WindowStyle="None" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" BorderBrush="#673AB7" BorderThickness="1.5">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -19,21 +19,27 @@
                                 <Setter TargetName="bd" Property="Background" Value="#FFE0E0E0" />
                             </Trigger>
                         </ControlTemplate.Triggers>
-                    </ControlTemplate> 
+                    </ControlTemplate>
                 </Button.Template>
                 <materialDesign:PackIcon Kind="Close" Foreground="#FF333333" Width="16" Height="16" />
             </Button>
         </StackPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="15,10,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <TextBox x:Name="txt_CompanyName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,10" />
+            <TextBox x:Name="txt_Position" Grid.Row="1" Grid.Column="0" materialDesign:HintAssist.Hint="Position" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+            <DatePicker x:Name="dp_DateApplied" Grid.Row="1" Grid.Column="2" materialDesign:HintAssist.Hint="Date Applied" Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+            <Button x:Name="btn_AddJob" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Content="ADD JOB APPLICATION" Style="{StaticResource MaterialDesignRaisedButton}" Background="#673AB7" BorderBrush="#673AB7" Foreground="White" Height="36" Margin="0,10,0,0" Click="btn_AddJob_Click" />
         </Grid>
     </Grid>
 </Window>
-  

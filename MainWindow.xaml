@@ -49,13 +49,13 @@
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="6" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border> 
+                        </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="bd" Property="Background" Value="#FFF0F0F0" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="bd" Property="Background" Value="#FFE0E0E0" /> 
+                                <Setter TargetName="bd" Property="Background" Value="#FFE0E0E0" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -72,11 +72,11 @@
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="40,40,40,20" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGray" ScrollViewer.CanContentScroll="True">
+            <ListBox Grid.Column="0" Margin="40,40,40,20" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#673AB7" BorderThickness="2" Background="LightGray" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.Template>
                     <ControlTemplate TargetType="ListBox">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" ClipToBounds="True">
-                            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False">
+                            <ScrollViewer Padding="8" Focusable="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter />
                             </ScrollViewer>
                         </Border>
@@ -84,32 +84,33 @@
                 </ListBox.Template>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
+                        <UniformGrid Columns="4" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="White" CornerRadius="8" Padding="12" Margin="0,4" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding JobTitle}" FontSize="16" FontWeight="SemiBold" />
-                                    <TextBlock Text="{Binding Company}" Foreground="Gray" Margin="0,4,0,0" />
-                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                        <materialDesign:Chip Content="{Binding Status}" Background="{Binding StatusColor}" />
-                                        <TextBlock Text="{Binding AppliedDate, StringFormat='Applied: {0:yyyy-MM-dd}'}" Margin="12,0,0,0" VerticalAlignment="Center" />
-                                    </StackPanel>
+                        <Border Background="White" CornerRadius="6" Padding="8" Margin="4" BorderBrush="#673AB7" BorderThickness="1" Width="150">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                                <TextBlock Text="{Binding CompanyName}" Foreground="Gray" FontSize="11" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                                <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                    <Border Background="#673AB7" CornerRadius="3" Padding="5,2">
+                                        <TextBlock Text="{Binding Status}" Foreground="White" FontSize="9" />
+                                    </Border>
                                 </StackPanel>
-                                <Button Grid.Column="1" Content="View" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DataContext.ViewJobCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" />
-                            </Grid>
+                                <TextBlock Text="{Binding AppliedAt, StringFormat='Applied: {0:yyyy-MM-dd}'}" FontSize="9" Margin="0,4,0,0" Foreground="Gray" />
+                            </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Column="0" Grid.Row="2" Margin="20">
+            <Grid Grid.Column="0" Grid.Row="1" Margin="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                     <Button x:Name="btn_delete" Content="Delete Job" Margin="0,0,5,0" Click="btn_delete_Click" />
                     <Button x:Name="btn_addJob" Content="Add Job" Margin="5,0,0,0" Click="btn_addJob_Click" />
