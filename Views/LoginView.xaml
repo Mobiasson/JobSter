@@ -3,7 +3,7 @@
         <Border BorderBrush="#673AB7" BorderThickness="0,0,0,2" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4">
             <TextBlock Text="JobSter" FontSize="30" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/Noto/NotoSans-Italic.ttf#Noto Sans" />
         </Border>
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,5,5,0">
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="5">
             <Button x:Name="btn_Close" Background="Transparent" BorderThickness="0" ToolTip="Close" Width="32" Height="32" Padding="6" Click="btn_Close_Click" Focusable="False" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
