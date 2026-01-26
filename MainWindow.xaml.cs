@@ -1,12 +1,13 @@
 ﻿using System.Windows;
+using JobSter.ViewModels;
+using JobSter.Views;
 
 namespace JobSter;
 
-public partial class MainWindow : Window
-{
-    public MainWindow()
-    {
+public partial class MainWindow : Window {
+    public MainWindow() {
         InitializeComponent();
+        DataContext = new MainWindowViewModel();
     }
 
     private void btn_Close_Click(object sender, RoutedEventArgs e) {
@@ -30,5 +31,15 @@ public partial class MainWindow : Window
         } else {
             this.WindowState = WindowState.Normal;
         }
+    }
+
+    private void btn_delete_Click(object sender, RoutedEventArgs e) {
+
+    }
+
+    private void btn_addJob_Click(object sender, RoutedEventArgs e) {
+        var addJobWindow = new AddJobView();
+        addJobWindow.Owner = this;
+        addJobWindow.ShowDialog();
     }
 }
