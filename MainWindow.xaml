@@ -4,7 +4,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,5,5,0">
+        <Border BorderBrush="#673AB7" BorderThickness="0,0,0,2" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4">
+            <TextBlock Text="JobSter" FontSize="30" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/Noto/NotoSans-Italic.ttf#Noto Sans" />
+        </Border>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,5,5,0" Height="32" Width="96">
             <Button x:Name="btn_Minimize" Background="Transparent" BorderThickness="0" ToolTip="Minimize" Width="32" Height="32" Padding="6" Click="btn_Minimize_Click" Focusable="False" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -60,42 +63,57 @@
                 <materialDesign:PackIcon Kind="Close" Foreground="#FF333333" Width="16" Height="16" />
             </Button>
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="320" Margin="10" BorderThickness="0" Background="LightGray" ScrollViewer.CanContentScroll="True">
-            <ListBox.Template>
-                <ControlTemplate TargetType="ListBox">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" ClipToBounds="True">
-                        <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False">
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </ListBox.Template>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border Background="White" CornerRadius="8" Padding="12" Margin="0,4" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel>
-                                <TextBlock Text="{Binding JobTitle}" FontSize="16" FontWeight="SemiBold" />
-                                <TextBlock Text="{Binding Company}" Foreground="Gray" Margin="0,4,0,0" />
-                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                                    <materialDesign:Chip Content="{Binding Status}" Background="{Binding StatusColor}" />
-                                    <TextBlock Text="{Binding AppliedDate, StringFormat='Applied: {0:yyyy-MM-dd}'}" Margin="12,0,0,0" VerticalAlignment="Center" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Margin="30,40,30,30" ItemsSource="{Binding AppliedJobs}" SelectedItem="{Binding SelectedJob}" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Background="LightGray" ScrollViewer.CanContentScroll="True">
+                <ListBox.Template>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" ClipToBounds="True">
+                            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="8" Padding="12" Margin="0,4" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding JobTitle}" FontSize="16" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding Company}" Foreground="Gray" Margin="0,4,0,0" />
+                                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                        <materialDesign:Chip Content="{Binding Status}" Background="{Binding StatusColor}" />
+                                        <TextBlock Text="{Binding AppliedDate, StringFormat='Applied: {0:yyyy-MM-dd}'}" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                            <Button Grid.Column="1" Content="View" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DataContext.ViewJobCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                <Button Grid.Column="1" Content="View" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DataContext.ViewJobCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Column="1" Margin="20">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                    <Button Content="Add Job" />
+                    <Button Content="Delete Job" />
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
