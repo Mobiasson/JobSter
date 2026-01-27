@@ -4,11 +4,18 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button x:Name="btn_Logout" Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Background="Transparent" Foreground="#673AB7" FontWeight="Heavy" BorderThickness="0" Click="btn_Logout_Click" ToolTip="Logout" />
+        <Menu>
+            <MenuItem Header="{Binding Username, StringFormat='Logged in as {0}'}" ToolTip="User profile" Width="auto" Height="auto" Margin="5" Padding="5">
+                <MenuItem Header="Profile" />
+                <MenuItem Header="Settings" />
+                <Separator />
+                <MenuItem Header="Log out" />
+            </MenuItem>
+        </Menu>
         <Border BorderBrush="#673AB7" BorderThickness="0,0,0,2" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4">
             <TextBlock Text="JobSter" FontSize="30" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/Noto/NotoSans-Italic.ttf#Noto Sans" />
         </Border>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,5,5,0" Height="32" Width="96">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Margin="5" Height="32" Width="96">
             <Button x:Name="btn_Minimize" Background="Transparent" BorderThickness="0" ToolTip="Minimize" Width="32" Height="32" Padding="6" Click="btn_Minimize_Click" Focusable="False" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">

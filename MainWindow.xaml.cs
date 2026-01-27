@@ -1,21 +1,39 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.WebSockets;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using JobSter.Model;
 using JobSter.Views;
 using MongoDB.Driver;
 
-namespace JobSter; 
-public partial class MainWindow : Window {
+namespace JobSter;
+public partial class MainWindow : Window, INotifyPropertyChanged {
+    private string _username = "Guest";
+
     public ObservableCollection<JobApplication> AppliedJobs { get; set; }
     public JobApplication? SelectedJob { get; set; }
+
+    public string Username {
+        get => _username;
+        set {
+            _username = value;
+            OnPropertyChanged(nameof(Username));
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged(string propertyName) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
     public MainWindow() {
         InitializeComponent();
         AppliedJobs = new ObservableCollection<JobApplication>();
+
+        // Set the username from the current logged-in user
+        if(App.CurrentUser != null) {
+            Username = App.CurrentUser.Username ?? "Guest";
+        }
+
         DataContext = this;
         LoadJobsFromDatabase();
     }
