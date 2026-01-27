@@ -4,6 +4,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Button x:Name="btn_Logout" Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Background="Transparent" Foreground="#673AB7" FontWeight="Heavy" BorderThickness="0" Click="btn_Logout_Click" ToolTip="Logout" />
         <Border BorderBrush="#673AB7" BorderThickness="0,0,0,2" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4">
             <TextBlock Text="JobSter" FontSize="30" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/Noto/NotoSans-Italic.ttf#Noto Sans" />
         </Border>
