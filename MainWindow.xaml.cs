@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using JobSter.Model;
 using JobSter.Views;
 using MongoDB.Driver;
@@ -114,4 +115,74 @@ public partial class MainWindow : Window, INotifyPropertyChanged {
         var loginView = new LoginView();
         loginView.ShowDialog();
     }
+
+    private void btn_LogoutAndDelete_Click(object sender, RoutedEventArgs e) {
+        var confirmation = MessageBox.Show(
+            $"Are you sure you want to delete your account and all associated data?",
+            "Delete Account Confirmation",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if(confirmation == MessageBoxResult.Yes) {
+            try {
+                var currentUser = App.CurrentUser;
+
+                if(App.MongoDb != null && currentUser != null && !string.IsNullOrEmpty(currentUser.Id)) {
+                    var jobFilter = Builders<JobApplication>.Filter.Eq(j => j.UserId, currentUser.Id);
+                    App.MongoDb.JobApplications.DeleteMany(jobFilter);
+                    var userFilter = Builders<User>.Filter.Eq(u => u.Id, currentUser.Id);
+                    App.MongoDb.Users.DeleteOne(userFilter);
+                    App.CurrentUser = null;
+                    MessageBox.Show(
+                        "Your account and all data has been deleted",
+                        "Account Deleted",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    this.Close();
+                    var loginView = new LoginView();
+                    loginView.ShowDialog();
+                } else {
+                    MessageBox.Show(
+                        "Unable to delete account.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+            catch(Exception ex) {
+                MessageBox.Show(
+                    $"An error occurred while deleting the account:\n{ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+    }
+
+    private void ContextMenu_Delete_Click(object sender, RoutedEventArgs e) {
+        try {
+            var menuItem = sender as MenuItem;
+            if(menuItem?.DataContext is JobApplication selectedJob) {
+                var result = MessageBox.Show(
+                    $"Are you sure you want to delete this job for {selectedJob.Title} at {selectedJob.CompanyName}?",
+                    "Confirm Delete",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if(result == MessageBoxResult.Yes) {
+                    if(App.MongoDb != null && !string.IsNullOrEmpty(selectedJob.Id)) {
+                        App.MongoDb.JobApplications.DeleteOne(j => j.Id == selectedJob.Id);
+                    }
+                    AppliedJobs.Remove(selectedJob);
+                    MessageBox.Show("Job application deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+        catch(Exception ex) {
+            MessageBox.Show($"An error occurred while deleting the job:\n{ex.Message}",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+    }
+
 }
