@@ -28,8 +28,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged {
     public MainWindow() {
         InitializeComponent();
         AppliedJobs = new ObservableCollection<JobApplication>();
-
-        // Set the username from the current logged-in user
         if(App.CurrentUser != null) {
             Username = App.CurrentUser.Username ?? "Guest";
         }

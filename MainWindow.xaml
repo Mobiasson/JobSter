@@ -7,9 +7,8 @@
         <Menu>
             <MenuItem Header="{Binding Username, StringFormat='Logged in as {0}'}" ToolTip="User profile" Width="auto" Height="auto" Margin="5" Padding="5">
                 <MenuItem Header="Profile" />
-                <MenuItem Header="Settings" />
                 <Separator />
-                <MenuItem Header="Log out" />
+                <MenuItem x:Name="btn_Logout" Header="Log out" Click="btn_Logout_Click"/>
             </MenuItem>
         </Menu>
         <Border BorderBrush="#673AB7" BorderThickness="0,0,0,2" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4">
