@@ -106,12 +106,12 @@
                         <Border Background="White" CornerRadius="6" Padding="8" Margin="4" BorderBrush="#673AB7" BorderThickness="1" Width="150">
                             <Border.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="In Process">
+                                    <MenuItem Header="In Process" Click="ContextMenu_Approval_Click">
                                         <MenuItem.Icon>
                                             <materialDesign:PackIcon Kind="Approval" />
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem Header="No Answer">
+                                    <MenuItem Header="Denied" Click="ContextMenu_Denied_Click">
                                         <MenuItem.Icon>
                                             <materialDesign:PackIcon Kind="Denied" />
                                         </MenuItem.Icon>
@@ -119,7 +119,7 @@
                                     <MenuItem Header="Delete" Click="ContextMenu_Delete_Click">
                                         <MenuItem.Icon>
                                             <materialDesign:PackIcon Kind="Delete" />
-                                        </MenuItem.Icon>
+                                        </MenuItem.Icon>                
                                     </MenuItem>
                                 </ContextMenu>
                             </Border.ContextMenu>
@@ -127,7 +127,7 @@
                                 <TextBlock Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
                                 <TextBlock Text="{Binding CompanyName}" Foreground="Gray" FontSize="11" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
                                 <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                                    <Border Background="#673AB7" CornerRadius="3" Padding="5,2">
+                                    <Border Background="{Binding StatusColor}"  CornerRadius="3" Padding="5,2">
                                         <TextBlock Text="{Binding Status}" Foreground="White" FontSize="9" />
                                     </Border>
                                 </StackPanel>
