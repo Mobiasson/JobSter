@@ -6,8 +6,6 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="{Binding Username, StringFormat='Logged in as {0}'}" ToolTip="User profile" Width="auto" Height="auto" Margin="5" Padding="5">
-                <MenuItem Header="Profile" />
-                <Separator />
                 <MenuItem x:Name="btn_LogoutAndDelete" Header="Logout and delete account" Background="IndianRed" Click="btn_LogoutAndDelete_Click" />
                 <MenuItem x:Name="btn_Logout" Header="Logout" Click="btn_Logout_Click" />
             </MenuItem>
@@ -119,7 +117,7 @@
                                     <MenuItem Header="Delete" Click="ContextMenu_Delete_Click">
                                         <MenuItem.Icon>
                                             <materialDesign:PackIcon Kind="Delete" />
-                                        </MenuItem.Icon>                
+                                        </MenuItem.Icon>
                                     </MenuItem>
                                 </ContextMenu>
                             </Border.ContextMenu>
@@ -127,7 +125,7 @@
                                 <TextBlock Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
                                 <TextBlock Text="{Binding CompanyName}" Foreground="Gray" FontSize="11" Margin="0,2,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
                                 <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                                    <Border Background="{Binding StatusColor}"  CornerRadius="3" Padding="5,2">
+                                    <Border Background="{Binding StatusColor}" CornerRadius="3" Padding="5,2">
                                         <TextBlock Text="{Binding Status}" Foreground="White" FontSize="9" />
                                     </Border>
                                 </StackPanel>

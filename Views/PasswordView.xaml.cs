@@ -36,7 +36,6 @@ public partial class PasswordView : Window {
             MessageBox.Show("Database service is not available.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-
         var existing = service.GetUserByUsernameAndPassword(_username, PasswordInput.Password);
         if(existing is null) {
             var user = new User {
@@ -45,8 +44,10 @@ public partial class PasswordView : Window {
             };
             service.CreateUser(user);
             App.CurrentUser = user;
+            MessageBox.Show($"Created new user.");
         } else {
             App.CurrentUser = existing;
+            MessageBox.Show($"Your account exists in the database.");
         }
         DialogResult = true;
     }
